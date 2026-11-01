@@ -1,0 +1,18 @@
+{
+  "name": "KaryaKit \u2014 Everyday Tools",
+  "short_name": "KaryaKit",
+  "description": "Simple everyday tools that work online and offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#1769e0",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
