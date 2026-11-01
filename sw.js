@@ -1,5 +1,5 @@
-const CACHE='karyakit-v1';
-const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg'];
+const CACHE='karyakit-v2';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./about.html','./privacy.html','./contact.html','./robots.txt','./sitemap.xml'];
 const LIBS=[
  'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
  'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
