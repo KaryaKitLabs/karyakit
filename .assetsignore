@@ -1,0 +1,11 @@
+.git
+.git/**
+.wrangler
+.wrangler/**
+wrangler.toml
+package.json
+package-lock.json
+vite.config.ts
+tsconfig.json
+metadata.json
+README.md
