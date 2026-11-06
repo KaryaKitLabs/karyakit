@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769e0">
+  <meta name="description" content="Calculate your exact age in years, months and days using your date of birth. Try KaryaKit's free online Age Calculator.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="KaryaKit">
+
+  <title>Free Age Calculator – Calculate Your Exact Age Online | KaryaKit</title>
+  <link rel="canonical" href="https://karyakit.karyakitlabs.workers.dev/age-calculator">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KaryaKit">
+  <meta property="og:title" content="Free Age Calculator | KaryaKit">
+  <meta property="og:description" content="Calculate your exact age in years, months and days using our free online age calculator.">
+  <meta property="og:url" content="https://karyakit.karyakitlabs.workers.dev/age-calculator">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Age Calculator | KaryaKit">
+  <meta name="twitter:description" content="Calculate your exact age in years, months and days using our free online age calculator.">
+
+  <style>
+    :root {
+      --blue: #1769e0;
+      --blue-light: #eaf2ff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e7ebf0;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --error: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .top {
+      max-width: 1000px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .brand { font-size: 20px; font-weight: 750; }
+    .tag { color: var(--muted); font-size: 12px; margin-top: -4px; }
+
+    .home-link {
+      margin-left: auto;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px 45px;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+
+    h1 {
+      font-size: clamp(27px, 5vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -.7px;
+      margin: 0 0 10px;
+    }
+
+    .intro { color: var(--muted); margin: 0 0 25px; }
+
+    .calculator {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: clamp(18px, 4vw, 28px);
+      box-shadow: 0 4px 18px rgba(20, 40, 80, .05);
+    }
+
+    h2 { font-size: 21px; margin: 0 0 14px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 650;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 12px;
+      border: 1px solid #d9e0e8;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 3px solid #1769e01c;
+      border-color: var(--blue);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 18px;
+      background: var(--blue);
+      color: #fff;
+      font: 650 14px system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    button.secondary { background: #edf2f8; color: #344054; }
+    button:hover { filter: brightness(.96); }
+
+    button:focus-visible {
+      outline: 3px solid #1769e055;
+      outline-offset: 2px;
+    }
+
+    .hint { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--error);
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: 20px;
+      border: 1px solid #dceaff;
+      background: #f3f7ff;
+      border-radius: 13px;
+    }
+
+    .result[hidden] { display: none; }
+    .result-heading { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+
+    .age-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .age-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 14px 8px;
+      text-align: center;
+    }
+
+    .age-number {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .age-label { font-size: 12px; color: var(--muted); }
+
+    .extra-results {
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid #dceaff;
+      font-size: 14px;
+    }
+
+    .extra-results p { margin: 6px 0; }
+
+    .content-section {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: clamp(19px, 4vw, 27px);
+      margin-top: 22px;
+    }
+
+    .content-section h2 { margin-bottom: 10px; }
+    .content-section p, .content-section li { color: #475467; }
+    .content-section li { margin-bottom: 7px; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+      padding: 15px 0;
+    }
+
+    .faq-item:last-child { border-bottom: 0; }
+    .faq-item h3 { font-size: 16px; margin: 0 0 6px; }
+    .faq-item p { margin: 0; }
+
+    .related a {
+      display: inline-block;
+      margin: 5px 12px 5px 0;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--blue);
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    @media (max-width: 600px) {
+      main { padding: 0 13px 35px; }
+      .top { padding: 11px 14px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .calculator { padding: 17px; }
+      .content-section { padding: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <a class="logo" href="/" aria-label="KaryaKit home">K</a>
+    <div>
+      <div class="brand">KaryaKit</div>
+      <div class="tag">Everyday tools. One simple place.</div>
+    </div>
+    <a class="home-link" href="/">All tools</a>
+  </div>
+</header>
+
+<main>
+  <div class="breadcrumb">
+    <a href="/">Home</a> / Age Calculator
+  </div>
+
+  <h1>Free Age Calculator</h1>
+  <p class="intro">
+    Calculate your age in years, months and days using your date of birth.
+    This free online age calculator also shows your total elapsed days and
+    the date of your next birthday.
+  </p>
+
+  <section class="calculator" aria-labelledby="calculator-title">
+    <h2 id="calculator-title">Calculate Your Age</h2>
+
+    <form id="ageForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="field">
+          <label for="asOf">Calculate Age On</label>
+          <input type="date" id="asOf" name="asOf" required>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Calculate Age</button>
+        <button type="reset" class="secondary">Reset</button>
+      </div>
+
+      <p class="hint">
+        Select your birth date and the date on which you want to calculate your age.
+      </p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div id="result" class="result" hidden aria-live="polite">
+      <div class="result-heading">Your calculated age</div>
+
+      <div class="age-grid">
+        <div class="age-box">
+          <div class="age-number" id="years">0</div>
+          <div class="age-label">Years</div>
+        </div>
+        <div class="age-box">
+          <div class="age-number" id="months">0</div>
+          <div class="age-label">Months</div>
+        </div>
+        <div class="age-box">
+          <div class="age-number" id="days">0</div>
+          <div class="age-label">Days</div>
+        </div>
+      </div>
+
+      <div class="extra-results">
+        <p><strong>Total elapsed days:</strong> <span id="totalDays"></span></p>
+        <p><strong>Next birthday:</strong> <span id="nextBirthday"></span></p>
+        <p><strong>Days until next birthday:</strong> <span id="daysLeft"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>What Is an Age Calculator?</h2>
+    <p>
+      An age calculator is an online tool that calculates the time between
+      your date of birth and a selected date. It displays your age in
+      completed years, months and days.
+    </p>
+    <p>
+      Instead of manually counting calendar days and months, you can enter
+      your birth date and get an age calculation in seconds.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>How to Use This Age Calculator</h2>
+    <ol>
+      <li>Enter your date of birth.</li>
+      <li>Select the date on which you want to calculate your age.</li>
+      <li>Click the Calculate Age button.</li>
+      <li>View your age in years, months and days.</li>
+      <li>Check your total elapsed days and next birthday information.</li>
+    </ol>
+  </section>
+
+  <section class="content-section">
+    <h2>How Is Your Age Calculated?</h2>
+    <p>
+      Your age is calculated by comparing your date of birth with the
+      selected calculation date.
+    </p>
+    <p>
+      The calculator counts completed calendar months from your birth date.
+      If the target month does not contain your birth day, it uses the last
+      day of that month for the monthly anniversary. The remaining days are
+      counted from that anniversary to the selected date.
+    </p>
+    <p>
+      Total elapsed days are calculated from the difference between the two
+      calendar dates, including leap days.
+    </p>
+    <p>
+      For birthdays on 29 February, this calculator treats 28 February as
+      the birthday in non-leap years. Legal age and administrative rules
+      may differ by location.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>How can I calculate my exact age?</h3>
+      <p>
+        Enter your date of birth, select the calculation date and click
+        Calculate Age. The tool displays your age in years, months and days.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I calculate my age in months and days?</h3>
+      <p>
+        Yes. This age calculator displays completed years, remaining
+        months and remaining days separately.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I calculate my age on a past date?</h3>
+      <p>
+        Yes. Select a past date in the Calculate Age On field to find
+        how old you were on that date.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Does this calculator include leap years?</h3>
+      <p>
+        Yes. The total elapsed days include leap days. The age calculation
+        also accounts for the length of each calendar month.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is this age calculator free?</h3>
+      <p>
+        Yes. You can use this calculator for free without creating an account.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is my date of birth stored?</h3>
+      <p>
+        The calculation runs in your browser. This page does not send the
+        dates you enter to a KaryaKit calculation service.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section related">
+    <h2>Explore More Free Tools</h2>
+    <p>Discover more useful everyday calculators and utilities on KaryaKit.</p>
+    <a href="/">Explore All KaryaKit Tools →</a>
+  </section>
+</main>
+
+<footer>
+  <div style="margin-bottom:10px">
+    © <span id="year"></span> KaryaKit · Everyday tools. One simple place.
+  </div>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const form = document.getElementById('ageForm');
+  const dobInput = document.getElementById('dob');
+  const asOfInput = document.getElementById('asOf');
+  const result = document.getElementById('result');
+  const status = document.getElementById('status');
+  const byId = id => document.getElementById(id);
+  const MS_PER_DAY = 86400000;
+
+  // Create a UTC date without the special Date.UTC handling of years 0–99.
+  function utcTimestamp(year, monthIndex, day) {
+    const date = new Date(0);
+    date.setUTCHours(0, 0, 0, 0);
+    date.setUTCFullYear(year, monthIndex, day);
+    return date.getTime();
+  }
+
+  function localTodayISO() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function parseDate(value) {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      return null;
+    }
+
+    const [year, month, day] = value.split('-').map(Number);
+    if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+      return null;
+    }
+
+    const timestamp = utcTimestamp(year, month - 1, day);
+    const date = new Date(timestamp);
+
+    if (
+      date.getUTCFullYear() !== year ||
+      date.getUTCMonth() !== month - 1 ||
+      date.getUTCDate() !== day
+    ) {
+      return null;
+    }
+
+    return { year, month, day, timestamp };
+  }
+
+  function daysInMonth(year, month) {
+    // month is 1–12; day 0 of the following month is the final day here.
+    return new Date(utcTimestamp(year, month, 0)).getUTCDate();
+  }
+
+  function formatDate(timestamp) {
+    return new Intl.DateTimeFormat('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC'
+    }).format(new Date(timestamp));
+  }
+
+  // Add calendar months to the original birth date, clamping month-end dates.
+  function addMonthsClamped(birth, monthsToAdd) {
+    const absoluteMonth = birth.year * 12 + (birth.month - 1) + monthsToAdd;
+    const year = Math.floor(absoluteMonth / 12);
+    const monthIndex = absoluteMonth - year * 12;
+    const month = monthIndex + 1;
+    const day = Math.min(birth.day, daysInMonth(year, month));
+    return utcTimestamp(year, monthIndex, day);
+  }
+
+  function calculateAge(birth, current) {
+    let completedMonths =
+      (current.year - birth.year) * 12 + (current.month - birth.month);
+
+    let lastAnniversary = addMonthsClamped(birth, completedMonths);
+
+    if (lastAnniversary > current.timestamp) {
+      completedMonths -= 1;
+      lastAnniversary = addMonthsClamped(birth, completedMonths);
+    }
+
+    const years = Math.floor(completedMonths / 12);
+    const months = completedMonths % 12;
+    const days = Math.round((current.timestamp - lastAnniversary) / MS_PER_DAY);
+
+    return { years, months, days };
+  }
+
+  function birthdayInYear(birth, targetYear) {
+    // 29 February is treated as 28 February in non-leap years.
+    const day = Math.min(birth.day, daysInMonth(targetYear, birth.month));
+    return utcTimestamp(targetYear, birth.month - 1, day);
+  }
+
+  function calculateNextBirthday(birth, current) {
+    let timestamp = birthdayInYear(birth, current.year);
+
+    if (timestamp < current.timestamp) {
+      timestamp = birthdayInYear(birth, current.year + 1);
+    }
+
+    return timestamp;
+  }
+
+  function showError(message) {
+    status.textContent = message;
+    result.hidden = true;
+  }
+
+  function calculate() {
+    status.textContent = '';
+    result.hidden = true;
+
+    const birth = parseDate(dobInput.value);
+    const current = parseDate(asOfInput.value);
+    const today = parseDate(localTodayISO());
+
+    if (!birth || !current || !today) {
+      showError('Please enter valid dates in both fields.');
+      return;
+    }
+
+    if (current.timestamp > today.timestamp) {
+      showError('The calculation date cannot be in the future.');
+      return;
+    }
+
+    if (birth.timestamp > current.timestamp) {
+      showError('Date of birth cannot be later than the calculation date.');
+      return;
+    }
+
+    const age = calculateAge(birth, current);
+    const totalDays = Math.round((current.timestamp - birth.timestamp) / MS_PER_DAY);
+    const nextBirthday = calculateNextBirthday(birth, current);
+    const daysUntilBirthday = Math.round((nextBirthday - current.timestamp) / MS_PER_DAY);
+
+    byId('years').textContent = age.years.toLocaleString('en-IN');
+    byId('months').textContent = age.months.toLocaleString('en-IN');
+    byId('days').textContent = age.days.toLocaleString('en-IN');
+    byId('totalDays').textContent = totalDays.toLocaleString('en-IN');
+    byId('nextBirthday').textContent = formatDate(nextBirthday);
+    byId('daysLeft').textContent = daysUntilBirthday === 0
+      ? 'Today is your birthday!'
+      : `${daysUntilBirthday.toLocaleString('en-IN')} ${daysUntilBirthday === 1 ? 'day' : 'days'}`;
+
+    result.hidden = false;
+  }
+
+  const today = localTodayISO();
+  asOfInput.max = today;
+  asOfInput.value = today;
+  dobInput.max = today;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    calculate();
+  });
+
+  form.addEventListener('reset', function () {
+    window.setTimeout(function () {
+      const refreshedToday = localTodayISO();
+      asOfInput.max = refreshedToday;
+      asOfInput.value = refreshedToday;
+      dobInput.max = refreshedToday;
+      status.textContent = '';
+      result.hidden = true;
+    }, 0);
+  });
+
+  byId('year').textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
