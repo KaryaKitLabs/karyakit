@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769e0">
+  <meta name="description" content="Create and download free QR codes for website links or text with KaryaKit's online QR code generator. Generate QR codes directly in your browser.">
+  <meta name="robots" content="index,follow">
+
+  <title>Free QR Code Generator Online – Create QR Codes | KaryaKit</title>
+  <link rel="canonical" href="https://karyakit.karyakitlabs.workers.dev/qr-code-generator">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free QR Code Generator Online | KaryaKit">
+  <meta property="og:description" content="Create and download QR codes for website links or text with KaryaKit's free online QR code generator.">
+  <meta property="og:url" content="https://karyakit.karyakitlabs.workers.dev/qr-code-generator">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free QR Code Generator Online | KaryaKit">
+  <meta name="twitter:description" content="Create and download QR codes for website links or text with KaryaKit.">
+
+  <style>
+    :root {
+      --blue: #1769e0;
+      --blue-light: #eaf2ff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e7ebf0;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --danger: #b42318;
+      --success: #16834a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .top {
+      max-width: 1000px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .brand { font-size: 20px; font-weight: 750; }
+    .tag { color: var(--muted); font-size: 12px; margin-top: -4px; }
+
+    .home-link {
+      margin-left: auto;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px 45px;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .breadcrumb a, a { color: var(--blue); }
+    .breadcrumb a { text-decoration: none; }
+
+    h1 {
+      font-size: clamp(27px, 5vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -.7px;
+      margin: 0 0 10px;
+    }
+
+    .intro { color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+
+    .panel, .content-section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 4px 18px rgba(20, 40, 80, .05);
+    }
+
+    .panel { padding: clamp(18px, 4vw, 28px); }
+    h2 { font-size: 21px; margin: 0 0 14px; }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 650;
+      margin-bottom: 7px;
+    }
+
+    textarea, select {
+      width: 100%;
+      border: 1px solid #d9e0e8;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 125px;
+      padding: 12px;
+      resize: vertical;
+    }
+
+    select {
+      min-height: 46px;
+      padding: 9px 11px;
+    }
+
+    textarea:focus, select:focus {
+      outline: 3px solid #1769e01c;
+      border-color: var(--blue);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, 210px);
+      gap: 14px;
+      margin-top: 15px;
+      align-items: end;
+    }
+
+    .counter, .hint {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .counter { text-align: right; margin-top: 5px; }
+    .hint { margin: 10px 0 0; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 18px;
+      background: var(--blue);
+      color: #fff;
+      font: 650 14px system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    button.secondary { background: #edf2f8; color: #344054; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #1769e066;
+      outline-offset: 3px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .status.error { color: var(--danger); }
+    .status.success { color: var(--success); }
+
+    .result {
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid #dceaff;
+      border-radius: 13px;
+      background: #f3f7ff;
+    }
+
+    .result[hidden] { display: none; }
+    .result h3 { margin: 0 0 12px; font-size: 16px; }
+
+    .qr-frame {
+      width: min(100%, 340px);
+      min-height: 250px;
+      margin: 0 auto;
+      padding: 14px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: auto;
+    }
+
+    #qrOutput canvas, #qrOutput img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .result-actions { justify-content: center; }
+    .content-section {
+      padding: clamp(19px, 4vw, 27px);
+      margin-top: 22px;
+      box-shadow: none;
+    }
+
+    .content-section h2 { margin-bottom: 10px; }
+    .content-section p, .content-section li { color: #475467; }
+    .content-section li { margin-bottom: 7px; }
+
+    .faq-item { padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .faq-item:last-child { border-bottom: 0; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 16px; }
+    .faq-item p { margin: 0; }
+
+    .related-links a {
+      display: inline-block;
+      margin: 5px 14px 5px 0;
+      text-decoration: none;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a { margin-right: 15px; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .top { padding: 11px 14px; }
+      main { padding: 0 13px 35px; }
+      .panel, .content-section { padding: 18px; }
+      .options { grid-template-columns: 1fr; }
+      .counter { text-align: left; }
+      .qr-frame { min-height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <a class="logo" href="/" aria-label="KaryaKit home">K</a>
+    <div>
+      <div class="brand">KaryaKit</div>
+      <div class="tag">Everyday tools. One simple place.</div>
+    </div>
+    <a class="home-link" href="/">All tools</a>
+  </div>
+</header>
+
+<main>
+  <div class="breadcrumb"><a href="/">Home</a> / QR Code Generator</div>
+
+  <h1>Free QR Code Generator</h1>
+  <p class="intro">
+    Create a QR code for a website link or text with KaryaKit's free online QR code generator.
+    Preview your code and download it as a PNG image. Generation happens in your browser.
+  </p>
+
+  <section class="panel" aria-labelledby="generator-heading">
+    <h2 id="generator-heading">Create Your QR Code</h2>
+
+    <div class="field">
+      <label for="qrContent">Website URL or text</label>
+      <textarea id="qrContent" maxlength="1500" placeholder="Paste a website link (for example, https://example.com) or type your text here." aria-describedby="contentHint characterCount"></textarea>
+      <div class="counter" id="characterCount">0 / 1,500 characters</div>
+    </div>
+
+    <div class="options">
+      <div class="field">
+        <label for="qrSize">QR code size</label>
+        <select id="qrSize">
+          <option value="180">Small (180 × 180)</option>
+          <option value="240" selected>Medium (240 × 240)</option>
+          <option value="320">Large (320 × 320)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="errorCorrection">Error correction</label>
+        <select id="errorCorrection">
+          <option value="L">Low</option>
+          <option value="M" selected>Medium</option>
+          <option value="Q">Quartile</option>
+          <option value="H">High</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="hint" id="contentHint">
+      Keep the content concise for easier scanning. Do not encode passwords or sensitive personal information.
+    </p>
+
+    <div class="actions">
+      <button type="button" id="generateButton">Generate QR Code</button>
+      <button type="button" class="secondary" id="clearButton">Clear</button>
+    </div>
+
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    <div class="result" id="result" hidden>
+      <h3>Your QR code</h3>
+      <div class="qr-frame">
+        <div id="qrOutput" aria-label="Generated QR code"></div>
+      </div>
+      <div class="actions result-actions">
+        <button type="button" id="downloadButton" disabled>Download PNG</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>What Is a QR Code Generator?</h2>
+    <p>
+      A QR code generator turns information such as a website address or a short message into a
+      scannable, square barcode. A phone or QR scanner can read the pattern and display the
+      information encoded in it.
+    </p>
+    <p>
+      KaryaKit creates standard, static QR codes. The information is embedded in the code itself;
+      this page does not provide scan tracking or a way to change the destination after a QR code
+      has been created.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>How to Create a QR Code</h2>
+    <ol>
+      <li>Paste a website URL or enter the text you want to encode.</li>
+      <li>Choose the QR code size and error-correction level.</li>
+      <li>Select <strong>Generate QR Code</strong>.</li>
+      <li>Scan the preview with a phone to check that it contains the right information.</li>
+      <li>Select <strong>Download PNG</strong> to save the QR code as an image.</li>
+    </ol>
+  </section>
+
+  <section class="content-section">
+    <h2>What Can You Put in a QR Code?</h2>
+    <ul>
+      <li><strong>Website links:</strong> encode a page address so people can open it by scanning.</li>
+      <li><strong>Plain text:</strong> share a short note, reference or instruction.</li>
+      <li><strong>Contact or event details:</strong> encode text in a format supported by the receiving scanner or app.</li>
+      <li><strong>Product or printed material:</strong> add a scannable link to packaging, posters or flyers.</li>
+    </ul>
+    <p>
+      Anyone who can scan the QR code may be able to read the information stored in it. Avoid
+      encoding private information. Before printing or sharing a code, test it with a phone camera.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>Static QR Codes: What to Know</h2>
+    <p>
+      This tool generates static QR codes. Their encoded content is fixed when the code is created.
+      If you encode a website address and later change or remove that webpage, the QR code will
+      still contain the original address. To use a different address, create and distribute a new QR code.
+    </p>
+    <p>
+      A static QR code does not have an automatic expiry date, but the website or information it
+      points to may become unavailable or change.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>Is this QR code generator free?</h3>
+      <p>Yes. You can create and download QR codes with this tool without creating a KaryaKit account.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I create a QR code for a website link?</h3>
+      <p>Yes. Paste the full website address, including https://, into the text box and generate the code.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I create a QR code containing plain text?</h3>
+      <p>Yes. Enter your message or other short text instead of a website address.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I download my QR code?</h3>
+      <p>Yes. After generating the code, select Download PNG to save the image.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do static QR codes expire?</h3>
+      <p>
+        The QR code itself has no automatic expiry date. However, a website address or other
+        destination stored in the code may stop working or change.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is the text I enter uploaded?</h3>
+      <p>
+        The QR code is generated in your browser and this page does not send the entered content
+        to a KaryaKit application server. The QR-generation library is loaded from a third-party CDN.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section related-links">
+    <h2>Explore More Free KaryaKit Tools</h2>
+    <p>Try other free calculators and everyday utilities:</p>
+    <a href="/age-calculator">Age Calculator</a>
+    <a href="/emi-calculator">EMI Calculator</a>
+    <a href="/percentage-calculator">Percentage Calculator</a>
+    <a href="/gst-calculator">GST Calculator</a>
+    <a href="/">All KaryaKit Tools</a>
+  </section>
+</main>
+
+<footer>
+  <div style="margin-bottom:10px">
+    © <span id="year"></span> KaryaKit · Everyday tools. One simple place.
+  </div>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const qrContent = document.getElementById('qrContent');
+  const qrSize = document.getElementById('qrSize');
+  const errorCorrection = document.getElementById('errorCorrection');
+  const generateButton = document.getElementById('generateButton');
+  const clearButton = document.getElementById('clearButton');
+  const downloadButton = document.getElementById('downloadButton');
+  const characterCount = document.getElementById('characterCount');
+  const status = document.getElementById('status');
+  const result = document.getElementById('result');
+  const qrOutput = document.getElementById('qrOutput');
+
+  let qrLibraryPromise = null;
+
+  function setStatus(message, type) {
+    status.textContent = message || '';
+    status.className = 'status' + (type ? ' ' + type : '');
+  }
+
+  function updateCharacterCount() {
+    const count = Array.from(qrContent.value).length;
+    characterCount.textContent = count.toLocaleString('en-IN') + ' / 1,500 characters';
+  }
+
+  function loadQRCodeLibrary() {
+    if (window.QRCode) return Promise.resolve();
+    if (qrLibraryPromise) return qrLibraryPromise;
+
+    qrLibraryPromise = new Promise(function (resolve, reject) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      script.async = true;
+
+      script.onload = function () {
+        if (window.QRCode) {
+          resolve();
+        } else {
+          qrLibraryPromise = null;
+          reject(new Error('The QR code library loaded, but it could not be initialized.'));
+        }
+      };
+
+      script.onerror = function () {
+        qrLibraryPromise = null;
+        script.remove();
+        reject(new Error('Could not load the QR code library. Check your internet connection and try again.'));
+      };
+
+      document.head.appendChild(script);
+    });
+
+    return qrLibraryPromise;
+  }
+
+  function clearGeneratedCode() {
+    qrOutput.replaceChildren();
+    result.hidden = true;
+    downloadButton.disabled = true;
+  }
+
+  async function generateQRCode() {
+    const value = qrContent.value.trim();
+
+    clearGeneratedCode();
+    setStatus('');
+
+    if (!value) {
+      setStatus('Enter a website URL or some text first.', 'error');
+      qrContent.focus();
+      return;
+    }
+
+    if (Array.from(value).length > 1500) {
+      setStatus('Please keep the content within 1,500 characters.', 'error');
+      return;
+    }
+
+    const byteLength = new TextEncoder().encode(value).length;
+    if (byteLength > 1500) {
+      setStatus('This text contains too much encoded data. Shorten it and try again.', 'error');
+      return;
+    }
+
+    generateButton.disabled = true;
+    generateButton.textContent = 'Generating…';
+    setStatus('Preparing the QR code library…');
+
+    try {
+      await loadQRCodeLibrary();
+
+      const size = Number(qrSize.value);
+      const level = errorCorrection.value;
+      const correctionLevels = {
+        L: QRCode.CorrectLevel.L,
+        M: QRCode.CorrectLevel.M,
+        Q: QRCode.CorrectLevel.Q,
+        H: QRCode.CorrectLevel.H
+      };
+
+      qrOutput.replaceChildren();
+
+      new QRCode(qrOutput, {
+        text: value,
+        width: size,
+        height: size,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: correctionLevels[level]
+      });
+
+      const canvas = qrOutput.querySelector('canvas');
+      if (!canvas) {
+        throw new Error('The QR code could not be created. Try shorter text or a different correction level.');
+      }
+
+      result.hidden = false;
+      downloadButton.disabled = false;
+      setStatus('QR code created. Scan the preview before sharing or printing it.', 'success');
+    } catch (error) {
+      qrOutput.replaceChildren();
+      result.hidden = true;
+      setStatus(error && error.message ? error.message : 'Could not generate the QR code. Please try again.', 'error');
+    } finally {
+      generateButton.disabled = false;
+      generateButton.textContent = 'Generate QR Code';
+    }
+  }
+
+  function downloadQRCode() {
+    const canvas = qrOutput.querySelector('canvas');
+    if (!canvas) {
+      setStatus('Generate a QR code before downloading it.', 'error');
+      return;
+    }
+
+    try {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'karyakit-qr-code.png';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setStatus('Your QR code PNG download has started.', 'success');
+    } catch (error) {
+      setStatus('The QR image could not be downloaded. Please generate it again.', 'error');
+    }
+  }
+
+  function clearForm() {
+    qrContent.value = '';
+    qrSize.value = '240';
+    errorCorrection.value = 'M';
+    updateCharacterCount();
+    clearGeneratedCode();
+    setStatus('');
+    qrContent.focus();
+  }
+
+  qrContent.addEventListener('input', function () {
+    updateCharacterCount();
+    clearGeneratedCode();
+    setStatus('');
+  });
+
+  qrSize.addEventListener('change', clearGeneratedCode);
+  errorCorrection.addEventListener('change', clearGeneratedCode);
+  generateButton.addEventListener('click', generateQRCode);
+  clearButton.addEventListener('click', clearForm);
+  downloadButton.addEventListener('click', downloadQRCode);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  updateCharacterCount();
+})();
+</script>
+
+</body>
+</html>
