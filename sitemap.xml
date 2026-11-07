@@ -37,4 +37,8 @@
     <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-generator</loc>
   </url>
 
+  <url>
+    <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-scanner</loc>
+  </url>
+
 </urlset>
