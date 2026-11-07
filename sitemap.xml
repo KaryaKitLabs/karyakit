@@ -41,4 +41,8 @@
     <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-scanner</loc>
   </url>
 
+  <url>
+    <loc>https://karyakit.karyakitlabs.workers.dev/image-compressor</loc>
+  </url>
+
 </urlset>
