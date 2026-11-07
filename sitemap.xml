@@ -45,4 +45,8 @@
     <loc>https://karyakit.karyakitlabs.workers.dev/image-compressor</loc>
   </url>
 
+  <url>
+    <loc>https://karyakit.karyakitlabs.workers.dev/image-resizer</loc>
+  </url>
+
 </urlset>
