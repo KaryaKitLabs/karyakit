@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769e0">
+  <meta name="description" content="Scan QR codes online using your camera or an uploaded image. KaryaKit reads QR content locally in your browser, for free.">
+  <meta name="robots" content="index,follow">
+  <title>Free QR Code Scanner Online – Scan QR from Camera or Image | KaryaKit</title>
+  <link rel="canonical" href="https://karyakit.karyakitlabs.workers.dev/qr-code-scanner">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free QR Code Scanner Online | KaryaKit">
+  <meta property="og:description" content="Scan QR codes with your camera or an image. Decode QR content locally in your browser with KaryaKit.">
+  <meta property="og:url" content="https://karyakit.karyakitlabs.workers.dev/qr-code-scanner">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root{--blue:#1769e0;--blue-light:#eaf2ff;--ink:#182230;--muted:#667085;--line:#e7ebf0;--bg:#f7f9fc;--card:#fff;--red:#b42318;--green:#16834a}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    header{background:#fff;border-bottom:1px solid var(--line)}
+    .top{max-width:1000px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:12px}
+    .logo{width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;text-decoration:none;flex:0 0 auto}
+    .brand{font-size:20px;font-weight:750}.tag{color:var(--muted);font-size:12px;margin-top:-4px}
+    .home-link{margin-left:auto;color:var(--blue);text-decoration:none;font-weight:650;font-size:14px}
+    main{max-width:1000px;margin:30px auto;padding:0 20px 45px}
+    .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:18px}.breadcrumb a{color:var(--blue);text-decoration:none}
+    h1{font-size:clamp(27px,5vw,36px);line-height:1.2;letter-spacing:-.7px;margin:0 0 10px}
+    .intro{color:var(--muted);margin:0 0 24px;max-width:780px}
+    .scanner,.content-section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,4vw,28px);box-shadow:0 4px 18px rgba(20,40,80,.05)}
+    h2{font-size:21px;margin:0 0 12px}
+    .scanner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .method{border:1px solid var(--line);border-radius:13px;padding:16px;min-width:0}
+    .method h3{margin:0 0 7px;font-size:17px}.method p{margin:0 0 13px;color:var(--muted);font-size:13px}
+    .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+    button,.file-button{min-height:44px;border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:#fff;font:650 14px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+    button.secondary,.file-button.secondary{background:#edf2f8;color:#344054}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    button:focus-visible,.file-button:focus-within{outline:3px solid #1769e055;outline-offset:2px}
+    input[type=file]{display:block;width:100%;max-width:100%;margin-top:8px;font:14px system-ui;color:var(--muted)}
+    video{display:block;width:100%;max-width:560px;max-height:420px;aspect-ratio:4/3;object-fit:contain;background:#111;border-radius:12px;margin:16px auto 0}
+    video[hidden]{display:none}
+    .status{min-height:24px;margin:14px 0 0;font-size:13px;color:var(--muted)}
+    .status.error{color:var(--red)}.status.success{color:var(--green)}
+    .result{margin-top:18px;padding:17px;border:1px solid #dceaff;background:#f3f7ff;border-radius:13px}
+    .result[hidden]{display:none}.result h3{margin:0 0 8px;font-size:16px}
+    .decoded{display:block;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;max-height:220px;overflow:auto}
+    .result-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+    .content-section{margin-top:20px;box-shadow:none}.content-section p,.content-section li{color:#475467}.content-section li{margin-bottom:7px}
+    .faq-item{border-bottom:1px solid var(--line);padding:14px 0}.faq-item:last-child{border-bottom:0}.faq-item h3{font-size:16px;margin:0 0 5px}.faq-item p{margin:0}
+    .related a{display:inline-block;margin:5px 14px 5px 0;color:var(--blue);text-decoration:none}
+    footer{max-width:1000px;margin:auto;padding:0 20px 28px;color:var(--muted);font-size:13px}
+    footer a{color:var(--blue);text-decoration:none;margin-right:15px}
+    @media(max-width:650px){main{padding:0 13px 35px}.top{padding:11px 14px}.scanner-grid{grid-template-columns:1fr}.method{padding:14px}.scanner{padding:16px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <a class="logo" href="/" aria-label="KaryaKit home">K</a>
+    <div><div class="brand">KaryaKit</div><div class="tag">Everyday tools. One simple place.</div></div>
+    <a class="home-link" href="/">All tools</a>
+  </div>
+</header>
+<main>
+  <div class="breadcrumb"><a href="/">Home</a> / QR Code Scanner</div>
+  <h1>Free QR Code Scanner Online</h1>
+  <p class="intro">Scan a QR code using your device camera or choose an image that contains a QR code. The QR content is decoded in your browser; your image is not sent to a KaryaKit application server.</p>
+
+  <section class="scanner" aria-labelledby="scanner-title">
+    <h2 id="scanner-title">Scan a QR Code</h2>
+    <div class="scanner-grid">
+      <div class="method">
+        <h3>Use your camera</h3>
+        <p>Allow camera access when your browser asks. For best results, hold the QR code steady and keep it inside the camera view.</p>
+        <div class="actions">
+          <button type="button" id="startCamera">Start camera</button>
+          <button type="button" id="stopCamera" class="secondary" disabled>Stop camera</button>
+        </div>
+      </div>
+      <div class="method">
+        <h3>Scan an image</h3>
+        <p>Choose a JPG, PNG, WebP or another browser-supported image containing a QR code.</p>
+        <label for="qrImage" class="file-button secondary">Choose image</label>
+        <input id="qrImage" type="file" accept="image/*">
+      </div>
+    </div>
+    <video id="cameraVideo" playsinline muted hidden aria-label="Live camera view for QR scanning"></video>
+    <p id="scanStatus" class="status" role="status" aria-live="polite">Choose a scanning method to begin.</p>
+    <div id="scanResult" class="result" hidden aria-live="polite">
+      <h3>QR code content</h3>
+      <output id="decodedText" class="decoded"></output>
+      <div class="result-actions">
+        <button type="button" id="copyResult" class="secondary">Copy result</button>
+        <a id="openResult" class="file-button" href="#" target="_blank" rel="noopener noreferrer" hidden>Open link</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>What Is a QR Code Scanner?</h2>
+    <p>A QR code scanner reads the information stored in a Quick Response (QR) code. A QR code may contain a website address, plain text, contact details or other encoded information. This free online QR code reader can use a camera or an image file to decode a QR code.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>How to Scan a QR Code</h2>
+    <ol>
+      <li>Choose <strong>Start camera</strong> and allow camera permission, or choose an image file containing a QR code.</li>
+      <li>Keep the QR code clear, in focus and fully visible.</li>
+      <li>Wait while the scanner reads the code.</li>
+      <li>Review the decoded content before copying it or opening a link.</li>
+    </ol>
+    <p>Camera scanning requires a secure connection (HTTPS) and a browser that supports camera access. If camera access is unavailable, use the image-upload option.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Is QR Code Scanning Private?</h2>
+    <p>The selected image and camera frames are processed locally in your browser by the scanner. They are not uploaded to a KaryaKit application server. The scanner loads the open-source jsQR library from jsDelivr when you start scanning; the CDN may receive normal technical connection information when your browser requests that library.</p>
+    <p>Check the decoded text before opening it. A QR code can contain a link to an untrusted or fraudulent website.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>Can I scan a QR code online for free?</h3><p>Yes. Use the camera or select an image containing a QR code. No KaryaKit account is required.</p></div>
+    <div class="faq-item"><h3>Can I scan a QR code from a photo?</h3><p>Yes. Choose an image from your device. The browser reads the image locally and displays the decoded content when a QR code is found.</p></div>
+    <div class="faq-item"><h3>Why does the camera not start?</h3><p>Camera scanning requires HTTPS, browser permission and an available camera. Check the browser's site permissions, close other apps using the camera, or try image scanning instead.</p></div>
+    <div class="faq-item"><h3>Does this QR scanner upload my image?</h3><p>The scanner processes the selected image and camera frames in your browser. It does not send them to a KaryaKit application server.</p></div>
+    <div class="faq-item"><h3>Is every QR code safe to open?</h3><p>No. A QR code can contain a misleading or harmful link. Check the decoded address and make sure you trust the destination before opening it.</p></div>
+  </section>
+
+  <section class="content-section related">
+    <h2>Explore More KaryaKit Tools</h2>
+    <a href="/qr-code-generator">QR Code Generator →</a>
+    <a href="/age-calculator">Age Calculator →</a>
+    <a href="/emi-calculator">EMI Calculator →</a>
+    <a href="/percentage-calculator">Percentage Calculator →</a>
+    <a href="/gst-calculator">GST Calculator →</a>
+  </section>
+</main>
+<footer>
+  <div style="margin-bottom:10px">© <span id="year"></span> KaryaKit · Everyday tools. One simple place.</div>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="/contact">Contact</a>
+</footer>
+<script>
+(function(){
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const startButton = $('startCamera');
+  const stopButton = $('stopCamera');
+  const video = $('cameraVideo');
+  const imageInput = $('qrImage');
+  const status = $('scanStatus');
+  const resultPanel = $('scanResult');
+  const decodedText = $('decodedText');
+  const copyButton = $('copyResult');
+  const openLink = $('openResult');
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d', {willReadFrequently:true});
+  const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
+  const MAX_DIMENSION = 1800;
+  let cameraStream = null;
+  let animationId = 0;
+  let lastScanAt = 0;
+  let scannerLibraryPromise = null;
+  let lastDecodedValue = '';
+
+  function setStatus(message, type){
+    status.textContent = message;
+    status.className = 'status' + (type ? ' ' + type : '');
+  }
+
+  function loadScannerLibrary(){
+    if(typeof window.jsQR === 'function') return Promise.resolve();
+    if(scannerLibraryPromise) return scannerLibraryPromise;
+    scannerLibraryPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js';
+      script.async = true;
+      script.onload = () => {
+        if(typeof window.jsQR === 'function') resolve();
+        else reject(new Error('The QR scanning library loaded but could not be initialized.'));
+      };
+      script.onerror = () => reject(new Error('Could not load the QR scanning library. Check your internet connection and try again.'));
+      document.head.appendChild(script);
+    }).catch(error => {
+      scannerLibraryPromise = null;
+      throw error;
+    });
+    return scannerLibraryPromise;
+  }
+
+  function clearResult(){
+    resultPanel.hidden = true;
+    decodedText.textContent = '';
+    openLink.hidden = true;
+    openLink.removeAttribute('href');
+    lastDecodedValue = '';
+  }
+
+  function showResult(value){
+    lastDecodedValue = value;
+    decodedText.textContent = value;
+    resultPanel.hidden = false;
+    copyButton.disabled = false;
+    const trimmed = value.trim();
+    try {
+      const parsed = new URL(trimmed);
+      if(parsed.protocol === 'http:' || parsed.protocol === 'https:'){
+        openLink.href = parsed.href;
+        openLink.hidden = false;
+      } else {
+        openLink.hidden = true;
+        openLink.removeAttribute('href');
+      }
+    } catch (_) {
+      openLink.hidden = true;
+      openLink.removeAttribute('href');
+    }
+    setStatus('QR code scanned successfully.', 'success');
+  }
+
+  function stopCamera(announce){
+    if(animationId){
+      cancelAnimationFrame(animationId);
+      animationId = 0;
+    }
+    if(cameraStream){
+      cameraStream.getTracks().forEach(track => track.stop());
+      cameraStream = null;
+    }
+    video.pause();
+    video.srcObject = null;
+    video.hidden = true;
+    startButton.disabled = false;
+    stopButton.disabled = true;
+    if(announce) setStatus('Camera stopped. You can scan an image or start the camera again.');
+  }
+
+  function readFrame(){
+    if(!cameraStream) return;
+    if(video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.videoWidth && video.videoHeight){
+      const scale = Math.min(1, MAX_DIMENSION / Math.max(video.videoWidth, video.videoHeight));
+      const width = Math.max(1, Math.round(video.videoWidth * scale));
+      const height = Math.max(1, Math.round(video.videoHeight * scale));
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(video, 0, 0, width, height);
+      try {
+        const frame = context.getImageData(0, 0, width, height);
+        const code = window.jsQR(frame.data, frame.width, frame.height, {inversionAttempts:'attemptBoth'});
+        if(code && code.data){
+          stopCamera(false);
+          showResult(code.data);
+          return;
+        }
+      } catch(error){
+        stopCamera(false);
+        setStatus('The camera frame could not be processed. Try scanning an image instead.', 'error');
+        return;
+      }
+    }
+    animationId = requestAnimationFrame(readFrame);
+  }
+
+  async function startCamera(){
+    clearResult();
+    if(!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function'){
+      setStatus('Camera access is not available in this browser. Use image scanning instead.', 'error');
+      return;
+    }
+    startButton.disabled = true;
+    setStatus('Loading scanner and requesting camera permission…');
+    try {
+      await loadScannerLibrary();
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        audio:false,
+        video:{facingMode:{ideal:'environment'}}
+      });
+      video.srcObject = cameraStream;
+      video.hidden = false;
+      await video.play();
+      stopButton.disabled = false;
+      setStatus('Camera is on. Hold a QR code steady in front of the camera.');
+      animationId = requestAnimationFrame(readFrame);
+    } catch(error){
+      stopCamera(false);
+      let message = error && error.message ? error.message : 'Could not start the camera.';
+      if(error && error.name === 'NotAllowedError') message = 'Camera permission was denied. Allow camera access in your browser settings or scan an image instead.';
+      else if(error && error.name === 'NotFoundError') message = 'No camera was found on this device. Scan an image instead.';
+      else if(error && error.name === 'NotReadableError') message = 'The camera may be in use by another application. Close it and try again.';
+      setStatus(message, 'error');
+    }
+  }
+
+  async function scanSelectedImage(file){
+    clearResult();
+    if(!file) return;
+    if(!file.type.startsWith('image/')){
+      setStatus('Please choose a valid image file.', 'error');
+      imageInput.value = '';
+      return;
+    }
+    if(file.size > MAX_IMAGE_BYTES){
+      setStatus('This image is larger than 15 MB. Choose a smaller image.', 'error');
+      imageInput.value = '';
+      return;
+    }
+    setStatus('Loading scanner and reading your image…');
+    try {
+      await loadScannerLibrary();
+      let bitmap;
+      if(typeof createImageBitmap === 'function'){
+        bitmap = await createImageBitmap(file);
+      } else {
+        bitmap = await new Promise((resolve, reject) => {
+          const objectUrl = URL.createObjectURL(file);
+          const image = new Image();
+          image.onload = () => {
+            URL.revokeObjectURL(objectUrl);
+            resolve(image);
+          };
+          image.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject(new Error('This image could not be opened by your browser.'));
+          };
+          image.src = objectUrl;
+        });
+      }
+      const sourceWidth = bitmap.width || bitmap.naturalWidth;
+      const sourceHeight = bitmap.height || bitmap.naturalHeight;
+      if(!sourceWidth || !sourceHeight) throw new Error('The selected image has no readable dimensions.');
+      const scale = Math.min(1, MAX_DIMENSION / Math.max(sourceWidth, sourceHeight));
+      canvas.width = Math.max(1, Math.round(sourceWidth * scale));
+      canvas.height = Math.max(1, Math.round(sourceHeight * scale));
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      if(typeof bitmap.close === 'function') bitmap.close();
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const code = window.jsQR(imageData.data, imageData.width, imageData.height, {inversionAttempts:'attemptBoth'});
+      if(code && code.data){
+        showResult(code.data);
+      } else {
+        setStatus('No readable QR code was found. Try a clearer, brighter image with the full QR code visible.', 'error');
+      }
+    } catch(error){
+      setStatus(error && error.message ? error.message : 'Could not scan this image. Try another image.', 'error');
+    } finally {
+      imageInput.value = '';
+    }
+  }
+
+  startButton.addEventListener('click', startCamera);
+  stopButton.addEventListener('click', () => stopCamera(true));
+  imageInput.addEventListener('change', event => scanSelectedImage(event.target.files && event.target.files[0]));
+
+  copyButton.addEventListener('click', async () => {
+    if(!lastDecodedValue) return;
+    try {
+      await navigator.clipboard.writeText(lastDecodedValue);
+      setStatus('QR content copied to clipboard.', 'success');
+    } catch(error){
+      setStatus('Clipboard access is unavailable. Select the decoded text and copy it manually.', 'error');
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden && cameraStream) stopCamera(true);
+  });
+  window.addEventListener('pagehide', () => stopCamera(false));
+  $('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
