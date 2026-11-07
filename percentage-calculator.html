@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769e0">
+  <meta name="description" content="Use KaryaKit's free percentage calculator to find a percentage, calculate marks, measure percentage increase or decrease, and convert CGPA using your institution's multiplier.">
+  <meta name="robots" content="index,follow">
+  <title>Free Percentage Calculator Online – Marks, Increase &amp; Decrease | KaryaKit</title>
+  <link rel="canonical" href="https://karyakit.karyakitlabs.workers.dev/percentage-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Percentage Calculator Online | KaryaKit">
+  <meta property="og:description" content="Calculate percentages, marks, percentage change and CGPA conversions with KaryaKit's free online tools.">
+  <meta property="og:url" content="https://karyakit.karyakitlabs.workers.dev/percentage-calculator">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --blue: #1769e0;
+      --blue-light: #eaf2ff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e7ebf0;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --green: #16834a;
+      --red: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    header { background: #fff; border-bottom: 1px solid var(--line); }
+    .top {
+      max-width: 1050px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      flex: 0 0 auto;
+    }
+    .brand { font-size: 20px; font-weight: 750; }
+    .tag { color: var(--muted); font-size: 12px; margin-top: -4px; }
+    .home-link {
+      margin-left: auto;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 14px;
+    }
+    main { max-width: 1050px; margin: 30px auto; padding: 0 20px 45px; }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a, a { color: var(--blue); }
+    .breadcrumb a { text-decoration: none; }
+    h1 { font-size: clamp(27px, 5vw, 36px); line-height: 1.2; letter-spacing: -.7px; margin: 0 0 10px; }
+    .intro { color: var(--muted); margin: 0 0 24px; max-width: 800px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .tool-card, .content-section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(20, 40, 80, .04);
+    }
+    .tool-card { padding: clamp(17px, 3vw, 23px); }
+    .tool-card h2 { font-size: 19px; line-height: 1.3; margin: 0 0 6px; }
+    .tool-description { color: var(--muted); font-size: 13px; margin: 0 0 17px; }
+    .field { margin-bottom: 13px; }
+    label { display: block; font-size: 13px; font-weight: 650; margin-bottom: 6px; }
+    input, select {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid #d9e0e8;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+    input:focus, select:focus { outline: 3px solid #1769e01c; border-color: var(--blue); }
+    .field-hint { color: var(--muted); font-size: 12px; margin: 5px 0 0; }
+    .actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 7px; }
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 16px;
+      background: var(--blue);
+      color: #fff;
+      font: 650 14px system-ui, sans-serif;
+      cursor: pointer;
+    }
+    button.secondary { background: #edf2f8; color: #344054; }
+    button:hover { filter: brightness(.96); }
+    button:focus-visible { outline: 3px solid #1769e055; outline-offset: 2px; }
+    .result {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f0f6ff;
+      border: 1px solid #dceaff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .result[hidden] { display: none; }
+    .result strong { color: var(--blue); }
+    .error { background: #fff1f0; border-color: #ffd6d2; color: var(--red); }
+    .content-section { padding: clamp(19px, 4vw, 27px); margin-top: 21px; }
+    .content-section h2 { font-size: 21px; margin: 0 0 10px; }
+    .content-section h3 { font-size: 16px; margin: 20px 0 6px; }
+    .content-section p, .content-section li { color: #475467; }
+    .content-section p:last-child { margin-bottom: 0; }
+    .formula {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f3f7ff;
+      border: 1px solid #dceaff;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 13px;
+      color: #243b5a;
+    }
+    .faq-item { border-bottom: 1px solid var(--line); padding: 14px 0; }
+    .faq-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .faq-item h3 { margin: 0 0 5px; font-size: 16px; }
+    .faq-item p { margin: 0; }
+    .related a { display: inline-block; margin: 5px 14px 5px 0; text-decoration: none; }
+    footer { max-width: 1050px; margin: auto; padding: 0 20px 28px; color: var(--muted); font-size: 13px; }
+    footer a { text-decoration: none; margin-right: 14px; }
+    @media (max-width: 720px) { .tool-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) {
+      main { padding: 0 13px 35px; margin-top: 22px; }
+      .top { padding: 11px 14px; }
+      .tool-card { padding: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <a class="logo" href="/" aria-label="KaryaKit home">K</a>
+      <div>
+        <div class="brand">KaryaKit</div>
+        <div class="tag">Everyday tools. One simple place.</div>
+      </div>
+      <a class="home-link" href="/">All tools</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> / Percentage Calculator</div>
+    <h1>Free Online Percentage Calculator</h1>
+    <p class="intro">
+      Calculate a percentage, find what percentage one number is of another,
+      work out percentage increase or decrease, calculate marks, and estimate
+      a CGPA-to-percentage conversion. These free percentage calculators work
+      in your browser without an account.
+    </p>
+
+    <div class="tool-grid">
+      <section class="tool-card" aria-labelledby="of-title">
+        <h2 id="of-title">1. Calculate a Percentage of a Number</h2>
+        <p class="tool-description">Find a specified percentage of any number.</p>
+        <form id="ofForm" novalidate>
+          <div class="field">
+            <label for="ofRate">Percentage (%)</label>
+            <input id="ofRate" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 20" required>
+          </div>
+          <div class="field">
+            <label for="ofNumber">Number</label>
+            <input id="ofNumber" type="number" step="any" inputmode="decimal" placeholder="For example, 500" required>
+          </div>
+          <div class="actions">
+            <button type="submit">Calculate</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="ofResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="tool-card" aria-labelledby="ratio-title">
+        <h2 id="ratio-title">2. What Percentage Is One Number of Another?</h2>
+        <p class="tool-description">Find what percentage a part is of a whole.</p>
+        <form id="ratioForm" novalidate>
+          <div class="field">
+            <label for="partNumber">Part</label>
+            <input id="partNumber" type="number" step="any" inputmode="decimal" placeholder="For example, 25" required>
+          </div>
+          <div class="field">
+            <label for="wholeNumber">Whole</label>
+            <input id="wholeNumber" type="number" step="any" inputmode="decimal" placeholder="For example, 200" required>
+          </div>
+          <div class="actions">
+            <button type="submit">Calculate</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="ratioResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="tool-card" aria-labelledby="change-title">
+        <h2 id="change-title">3. Percentage Increase or Decrease</h2>
+        <p class="tool-description">Compare an original value with a new value.</p>
+        <form id="changeForm" novalidate>
+          <div class="field">
+            <label for="oldValue">Original value</label>
+            <input id="oldValue" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 100" required>
+          </div>
+          <div class="field">
+            <label for="newValue">New value</label>
+            <input id="newValue" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 125" required>
+          </div>
+          <div class="actions">
+            <button type="submit">Calculate change</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="changeResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="tool-card" aria-labelledby="reverse-title">
+        <h2 id="reverse-title">4. Reverse Percentage Calculator</h2>
+        <p class="tool-description">Work backwards to find the original value before a percentage change.</p>
+        <form id="reverseForm" novalidate>
+          <div class="field">
+            <label for="finalValue">Value after the change</label>
+            <input id="finalValue" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 120" required>
+          </div>
+          <div class="field">
+            <label for="reverseRate">Percentage change (%)</label>
+            <input id="reverseRate" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 20" required>
+          </div>
+          <div class="field">
+            <label for="reverseType">Type of change</label>
+            <select id="reverseType">
+              <option value="increase">After an increase</option>
+              <option value="decrease">After a decrease</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button type="submit">Find original value</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="reverseResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="tool-card" aria-labelledby="marks-title">
+        <h2 id="marks-title">5. Marks Percentage Calculator</h2>
+        <p class="tool-description">Calculate your total marks percentage across subjects.</p>
+        <form id="marksForm" novalidate>
+          <div class="field">
+            <label for="obtainedMarks">Marks obtained (total)</label>
+            <input id="obtainedMarks" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 425" required>
+          </div>
+          <div class="field">
+            <label for="maximumMarks">Maximum marks (total)</label>
+            <input id="maximumMarks" type="number" min="0.0000001" step="any" inputmode="decimal" placeholder="For example, 500" required>
+          </div>
+          <div class="actions">
+            <button type="submit">Calculate marks percentage</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="marksResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="tool-card" aria-labelledby="cgpa-title">
+        <h2 id="cgpa-title">6. CGPA to Percentage Converter</h2>
+        <p class="tool-description">Estimate a percentage using the conversion multiplier specified by your school or university.</p>
+        <form id="cgpaForm" novalidate>
+          <div class="field">
+            <label for="cgpaValue">Your CGPA</label>
+            <input id="cgpaValue" type="number" min="0" step="any" inputmode="decimal" placeholder="For example, 8.2" required>
+          </div>
+          <div class="field">
+            <label for="cgpaScale">Maximum CGPA scale</label>
+            <input id="cgpaScale" type="number" min="0.0000001" step="any" inputmode="decimal" value="10" required>
+          </div>
+          <div class="field">
+            <label for="cgpaMultiplier">Institution's percentage multiplier</label>
+            <input id="cgpaMultiplier" type="number" min="0.0000001" step="any" value="9.5" required>
+            <p class="field-hint">Example only: 9.5 is not a universal conversion rule. Check your institution's official formula.</p>
+          </div>
+          <div class="actions">
+            <button type="submit">Convert to percentage</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+          <div id="cgpaResult" class="result" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+    </div>
+
+    <section class="content-section">
+      <h2>What Is a Percentage?</h2>
+      <p>A percentage expresses a value as a part of 100. The word percentage means “per hundred” and is commonly written using the % symbol.</p>
+      <p>Percentages are used for exam marks, discounts, price changes, interest rates, statistics and many everyday calculations. A percentage calculator helps you work out these values without doing the arithmetic manually.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Percentage Formulas</h2>
+      <h3>1. Percentage of a number</h3>
+      <div class="formula">Result = (Percentage ÷ 100) × Number</div>
+      <p>Example: 20% of 500 = (20 ÷ 100) × 500 = 100.</p>
+      <h3>2. What percentage is one number of another?</h3>
+      <div class="formula">Percentage = (Part ÷ Whole) × 100</div>
+      <p>Example: 25 out of 200 = (25 ÷ 200) × 100 = 12.5%.</p>
+      <h3>3. Percentage increase or decrease</h3>
+      <div class="formula">Percentage change = ((New value − Original value) ÷ Original value) × 100</div>
+      <p>A positive result means an increase. A negative result means a decrease. The percentage change calculator displays the direction as well as the size of the change.</p>
+      <h3>4. Marks percentage</h3>
+      <div class="formula">Marks percentage = (Marks obtained ÷ Maximum marks) × 100</div>
+      <p>Example: 425 marks out of 500 = 85%.</p>
+      <h3>5. Reverse percentage</h3>
+      <div class="formula">Original before increase = Final value ÷ (1 + Rate ÷ 100)</div>
+      <div class="formula">Original before decrease = Final value ÷ (1 − Rate ÷ 100)</div>
+      <p>For a decrease, the rate must be less than 100% to calculate a positive original value.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>How to Calculate Your Exam Marks Percentage</h2>
+      <ol>
+        <li>Add the marks you obtained in the subjects you want to include.</li>
+        <li>Add the maximum possible marks for those same subjects.</li>
+        <li>Enter both totals in the Marks Percentage Calculator above.</li>
+        <li>Select Calculate marks percentage to see your result.</li>
+      </ol>
+      <p>For example, if your total is 425 out of 500, your percentage is 85%. Follow your school or examination board's rules about which subjects and marks should be included in an official result.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>CGPA to Percentage Conversion</h2>
+      <p>There is no single conversion multiplier that applies to every school, university or grading system. Some institutions use a multiplier, while others publish a different formula.</p>
+      <p>The converter above lets you enter your institution's multiplier. Its initial value of 9.5 is only an editable example, not a guarantee of the correct formula for your course or marksheet.</p>
+      <p>For an official application, admission or examination form, use the conversion method specified by the institution that issued your CGPA.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>How do I calculate a percentage?</h3>
+        <p>To find what percentage one number is of another, divide the part by the whole and multiply by 100. To find a percentage of a number, divide the percentage by 100 and multiply by the number.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I calculate my exam marks percentage?</h3>
+        <p>Add the marks obtained, divide by the total maximum marks, and multiply by 100. Use the same subjects in both totals.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I calculate percentage increase?</h3>
+        <p>Subtract the original value from the new value, divide the difference by the original value, and multiply by 100.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I calculate percentage decrease?</h3>
+        <p>Subtract the new value from the original value, divide the difference by the original value, and multiply by 100.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I calculate a percentage backwards?</h3>
+        <p>Yes. Enter the final value and the percentage increase or decrease in the reverse percentage calculator to estimate the original value.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is there one universal CGPA-to-percentage formula?</h3>
+        <p>No. Conversion rules vary by institution and grading system. Check your institution's official instructions and enter its multiplier in the converter.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is this percentage calculator free?</h3>
+        <p>Yes. KaryaKit's percentage calculator is free to use and does not require an account.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are my numbers uploaded or stored?</h3>
+        <p>The calculations run in your browser. This page does not send the numbers you enter to a KaryaKit calculation server.</p>
+      </div>
+    </section>
+
+    <section class="content-section related">
+      <h2>Explore More KaryaKit Tools</h2>
+      <p>Try other free everyday tools:</p>
+      <a href="/age-calculator">Age Calculator</a>
+      <a href="/emi-calculator">EMI Calculator</a>
+      <a href="/">All KaryaKit Tools</a>
+    </section>
+  </main>
+
+  <footer>
+    <div style="margin-bottom:10px">© <span id="year"></span> KaryaKit · Everyday tools. One simple place.</div>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/contact">Contact</a>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const $ = (id) => document.getElementById(id);
+      const numberFormat = new Intl.NumberFormat('en-IN', {
+        maximumFractionDigits: 2
+      });
+
+      function readNumber(id, label) {
+        const input = $(id);
+        const raw = input.value.trim();
+        if (raw === '') throw new Error('Enter ' + label + '.');
+        const value = Number(raw);
+        if (!Number.isFinite(value)) throw new Error('Enter a valid number for ' + label + '.');
+        return value;
+      }
+
+      function showResult(id, message, isError) {
+        const box = $(id);
+        box.textContent = message;
+        box.classList.toggle('error', Boolean(isError));
+        box.hidden = false;
+      }
+
+      function attachForm(formId, resultId, handler) {
+        const form = $(formId);
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          try {
+            handler();
+          } catch (error) {
+            showResult(resultId, error.message || 'Please check your values and try again.', true);
+          }
+        });
+        form.addEventListener('reset', function () {
+          window.setTimeout(function () {
+            const box = $(resultId);
+            box.textContent = '';
+            box.classList.remove('error');
+            box.hidden = true;
+          }, 0);
+        });
+      }
+
+      attachForm('ofForm', 'ofResult', function () {
+        const rate = readNumber('ofRate', 'a percentage');
+        const number = readNumber('ofNumber', 'a number');
+        if (rate < 0) throw new Error('Percentage cannot be negative in this calculator.');
+        const answer = (rate / 100) * number;
+        showResult('ofResult', rate + '% of ' + numberFormat.format(number) + ' = ' + numberFormat.format(answer), false);
+      });
+
+      attachForm('ratioForm', 'ratioResult', function () {
+        const part = readNumber('partNumber', 'the part');
+        const whole = readNumber('wholeNumber', 'the whole');
+        if (whole === 0) throw new Error('The whole must not be zero.');
+        const answer = (part / whole) * 100;
+        showResult('ratioResult', numberFormat.format(part) + ' is ' + numberFormat.format(answer) + '% of ' + numberFormat.format(whole) + '.', false);
+      });
+
+      attachForm('changeForm', 'changeResult', function () {
+        const oldValue = readNumber('oldValue', 'the original value');
+        const newValue = readNumber('newValue', 'the new value');
+        if (oldValue <= 0) throw new Error('The original value must be greater than zero.');
+        if (newValue < 0) throw new Error('The new value cannot be negative.');
+        const change = ((newValue - oldValue) / oldValue) * 100;
+        const direction = change > 0 ? 'increase' : change < 0 ? 'decrease' : 'no change';
+        showResult('changeResult', 'Percentage change: ' + numberFormat.format(Math.abs(change)) + '% ' + direction + '.', false);
+      });
+
+      attachForm('reverseForm', 'reverseResult', function () {
+        const finalValue = readNumber('finalValue', 'the value after the change');
+        const rate = readNumber('reverseRate', 'the percentage change');
+        const type = $('reverseType').value;
+        if (finalValue < 0) throw new Error('The final value cannot be negative.');
+        if (rate < 0) throw new Error('Percentage change cannot be negative.');
+        if (type === 'decrease' && rate >= 100) throw new Error('For a decrease, the percentage must be less than 100%.');
+        const divisor = type === 'increase' ? 1 + rate / 100 : 1 - rate / 100;
+        const original = finalValue / divisor;
+        showResult('reverseResult', 'Original value before the ' + type + ': ' + numberFormat.format(original) + '.', false);
+      });
+
+      attachForm('marksForm', 'marksResult', function () {
+        const obtained = readNumber('obtainedMarks', 'marks obtained');
+        const maximum = readNumber('maximumMarks', 'maximum marks');
+        if (obtained < 0) throw new Error('Marks obtained cannot be negative.');
+        if (maximum <= 0) throw new Error('Maximum marks must be greater than zero.');
+        if (obtained > maximum) throw new Error('Marks obtained cannot exceed maximum marks.');
+        const percentage = (obtained / maximum) * 100;
+        showResult('marksResult', 'Your marks percentage is ' + numberFormat.format(percentage) + '%.', false);
+      });
+
+      attachForm('cgpaForm', 'cgpaResult', function () {
+        const cgpa = readNumber('cgpaValue', 'your CGPA');
+        const scale = readNumber('cgpaScale', 'the maximum CGPA scale');
+        const multiplier = readNumber('cgpaMultiplier', 'your institution\'s multiplier');
+        if (scale <= 0) throw new Error('The maximum CGPA scale must be greater than zero.');
+        if (cgpa < 0 || cgpa > scale) throw new Error('CGPA must be between zero and the maximum scale.');
+        if (multiplier <= 0) throw new Error('The multiplier must be greater than zero.');
+        const percentage = cgpa * multiplier;
+        showResult('cgpaResult', 'Estimated percentage using the entered multiplier: ' + numberFormat.format(percentage) + '%. Verify the formula with your institution before using this result officially.', false);
+      });
+
+      $('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
