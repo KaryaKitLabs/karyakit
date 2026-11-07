@@ -33,4 +33,8 @@
     <loc>https://karyakit.karyakitlabs.workers.dev/gst-calculator</loc>
   </url>
 
+  <url>
+    <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-generator</loc>
+  </url>
+
 </urlset>
