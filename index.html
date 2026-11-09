@@ -112,14 +112,30 @@
     .main-nav a { color: var(--ink-2); font-size: 13px; font-weight: 650; text-decoration: none; transition: color .15s ease; }
     .main-nav a:hover { color: var(--blue); }
     .header-actions { display: flex; align-items: center; gap: 10px; min-width: max-content; }
-    .status {
-      display: inline-flex; align-items: center; gap: 7px;
-      color: var(--green); background: var(--green-soft);
-      border-radius: 999px; padding: 6px 10px;
-      font-size: 11px; font-weight: 700;
-    }
-    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-    .status.offline { color: #9a5b00; background: var(--yellow-soft); }
+   .status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #067647;
+  background: #eaf8ef;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status.offline {
+  color: #7a4a00;
+  background: #fff8e7;
+}
     .btn-primary, .btn-secondary, .btn-text {
       min-height: 40px; border: 0; border-radius: var(--radius-control);
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
