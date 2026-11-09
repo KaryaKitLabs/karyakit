@@ -1,52 +1,46 @@
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/about</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/privacy</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/contact</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/age-calculator</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/emi-calculator</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/percentage-calculator</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/gst-calculator</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-generator</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/qr-code-scanner</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/image-compressor</loc>
   </url>
-
   <url>
     <loc>https://karyakit.karyakitlabs.workers.dev/image-resizer</loc>
   </url>
+  <url>
+    <loc>https://karyakit.karyakitlabs.workers.dev/word-counter</loc>
+  </url>
 
 </urlset>
+```
